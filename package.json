@@ -1,0 +1,36 @@
+{
+    "name": "grunt-bazalt-upload",
+    "description": "Upload files through HTTP request with RSA signing",
+    "version": "0.0.1",
+    "homepage": "https://github.com/DiscoverGrunt/grunt-http-upload",
+    "author": {
+        "name": "Vitalii Savchuk",
+        "url": "http://bazalt-cms.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/esvit/grunt-bazalt-upload.git"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/esvit/grunt-bazalt-upload/blob/master/LICENSE-MIT"
+        }
+    ],
+    "main": "tasks/bazalt_upload.js",
+    "engines": {
+        "node": ">= 0.8.0"
+    },
+    "keywords": [
+        "gruntplugin",
+        "grunt",
+        "http",
+        "upload",
+        "post",
+        "api",
+        "rsa"
+    ],
+    "dependencies": {
+        "restler": "~3.2.0"
+    }
+}
