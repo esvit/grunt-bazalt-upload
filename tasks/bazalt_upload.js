@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                                 try {
                                     var err = JSON.parse(data);
                                 } catch (e) {
-                                    grunt.fail.fatal(data);
+                                    grunt.fail.fatal('Invalid JSON response "' + options.url + '": ' + data);
                                 }
                                 grunt.fail.fatal('Failed uploading "' + filepath + '" as "' + field +
                                     '" (status code: ' + response.statusCode + ', message: ' + err.error + ') - ' +
