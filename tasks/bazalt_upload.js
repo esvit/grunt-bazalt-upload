@@ -59,8 +59,13 @@ module.exports = function (grunt) {
                                 md5: md5,
                                 size: fileSize,
                                 ctime: stats.ctime.toISOString()
-                            }),
+                            }), token;
+
+                        try {
                             token = crypt.encrypt(message);
+                        } catch (e) {
+                            grunt.fail.fatal('Invalid "' + options.public_key + '" file. Must be RSA public key (openssl rsa -pubout -in "private.key" -out "public.key")');
+                        }
                         grunt.log.writeln("Token for deploy: " + token);
 
                         headers['Authorization'] = 'Token ' + token;
@@ -74,7 +79,11 @@ module.exports = function (grunt) {
                             if (response.statusCode >= 200 && response.statusCode < 300) {
                                 grunt.log.ok('Upload successful of "' + filepath + '" as "' + field + '" - ' + options.method + ' @ ' + options.url);
                             } else {
-                                var err = JSON.parse(data);
+                                try {
+                                    var err = JSON.parse(data);
+                                } catch (e) {
+                                    grunt.fail.fatal(data);
+                                }
                                 grunt.fail.fatal('Failed uploading "' + filepath + '" as "' + field +
                                     '" (status code: ' + response.statusCode + ', message: ' + err.error + ') - ' +
                                     options.method + ' @ ' + options.url);
